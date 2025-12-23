@@ -38,10 +38,20 @@ export default function RegexBuilder() {
   const [anchorEl, setAnchorEl] = useState(null);
   const [copied, setCopied] = useState(false);
 
-  const sensors = useSensors(useSensor(PointerSensor, { activationConstraint: { distance: 5 } }));
+  const sensors = useSensors(
+    useSensor(PointerSensor, { activationConstraint: { distance: 5 } })
+  );
 
   const addSegment = () =>
-    setSegments((s) => [...s, { id: uuidv4(), type: "fixed", optional: false, config: { value: "FIXED" } }]);
+    setSegments((s) => [
+      ...s,
+      {
+        id: uuidv4(),
+        type: "fixed",
+        optional: false,
+        config: { value: "FIXED" },
+      },
+    ]);
 
   const changeSegmentType = (id, type) =>
     setSegments((prev) =>
@@ -75,7 +85,12 @@ export default function RegexBuilder() {
               r = `\\d{${s.config.min},${s.config.max}}`;
               break;
             case "letters": {
-              const c = s.config.case === "upper" ? "A-Z" : s.config.case === "lower" ? "a-z" : "a-zA-Z";
+              const c =
+                s.config.case === "upper"
+                  ? "A-Z"
+                  : s.config.case === "lower"
+                  ? "a-z"
+                  : "a-zA-Z";
               r = `[${c}]{${s.config.min},${s.config.max}}`;
               break;
             }
@@ -95,7 +110,9 @@ export default function RegexBuilder() {
   const handleSaveEdit = () => {
     if (editingId) {
       setSegments((p) =>
-        p.map((x) => (x.id === editingId ? { ...x, config: { value: editingValue } } : x))
+        p.map((x) =>
+          x.id === editingId ? { ...x, config: { value: editingValue } } : x
+        )
       );
       setEditingId(null);
     }
@@ -108,7 +125,9 @@ export default function RegexBuilder() {
   };
 
   return (
-    <Box sx={{ height: "100vh", display: "grid", placeItems: "center", gap: 3 }}>
+    <Box
+      sx={{ height: "100vh", display: "grid", placeItems: "center", gap: 3 }}
+    >
       <Container>
         <DndContext
           sensors={sensors}
@@ -121,8 +140,20 @@ export default function RegexBuilder() {
             }
           }}
         >
-          <SortableContext items={segments.map((s) => s.id)} strategy={horizontalListSortingStrategy}>
-            <Stack direction="row" spacing={1} sx={{ minWidth: 200, border: "1px solid #ccc", p: 1, borderRadius: "6px 6px 6px 0" }}>
+          <SortableContext
+            items={segments.map((s) => s.id)}
+            strategy={horizontalListSortingStrategy}
+          >
+            <Stack
+              direction="row"
+              spacing={1}
+              sx={{
+                minWidth: 200,
+                border: "1px solid #ccc",
+                p: 1,
+                borderRadius: "6px 6px 6px 0",
+              }}
+            >
               <Stack direction="row" flexGrow={1} alignItems="center">
                 {segments.map((seg) => (
                   <SortableChip
@@ -141,13 +172,15 @@ export default function RegexBuilder() {
                       }
                     }}
                     onChangeType={changeSegmentType}
-                    onDelete={(id) => setSegments((prev) => prev.filter((s) => s.id !== id))}
+                    onDelete={(id) =>
+                      setSegments((prev) => prev.filter((s) => s.id !== id))
+                    }
                     saveEdit={handleSaveEdit}
                     handleKeyDown={(e) => {
-                      if(e.key === "Escape"){
+                      if (e.key === "Escape") {
                         setEditingId(null);
-                      }else if(e.key === "Enter"){
-                        handleSaveEdit()
+                      } else if (e.key === "Enter") {
+                        handleSaveEdit();
                       }
                     }}
                   />
@@ -174,7 +207,12 @@ export default function RegexBuilder() {
               endAdornment: (
                 <InputAdornment position="end">
                   <Tooltip title={copied ? "Copied!" : "Copy"}>
-                    <IconButton edge="end" size="small" onClick={handleCopy} tabIndex={-1}>
+                    <IconButton
+                      edge="end"
+                      size="small"
+                      onClick={handleCopy}
+                      tabIndex={-1}
+                    >
                       <ContentCopyIcon fontSize="small" />
                     </IconButton>
                   </Tooltip>
@@ -204,9 +242,13 @@ export default function RegexBuilder() {
         <ConfigPopover
           anchorEl={anchorEl}
           segment={configSeg}
-          onChange={(k, v) => setConfigSeg((s) => ({ ...s, config: { ...s.config, [k]: v } }))}
+          onChange={(k, v) =>
+            setConfigSeg((s) => ({ ...s, config: { ...s.config, [k]: v } }))
+          }
           onSave={() => {
-            setSegments((p) => p.map((x) => (x.id === configSeg.id ? configSeg : x)));
+            setSegments((p) =>
+              p.map((x) => (x.id === configSeg.id ? configSeg : x))
+            );
             setAnchorEl(null);
           }}
           onClose={() => setAnchorEl(null)}

@@ -22,7 +22,7 @@ export default function SortableChip({
   const [menuAnchor, setMenuAnchor] = useState(null);
 
   const style = {
-    transform: CSS.Transform.toString(transform),
+    transform: CSS.Translate.toString(transform),
     transition,
   };
 
