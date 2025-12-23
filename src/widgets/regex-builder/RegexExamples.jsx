@@ -20,11 +20,13 @@ export default function RegexExamples({ regex }) {
 
   return (
     <Box mt={2} width={"100%"}>
-      <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <Typography variant="subtitle2">Matching Examples</Typography>
+      <Stack direction="row" mb={2} alignItems="center" justifyContent="space-between">
+        <Typography variant="body1">Matching Examples</Typography>
 
         <Button
           size="small"
+          disableElevation
+          disableRipple
           onClick={() => setExamples(generateRegexExamples(regex))}
         >
           Refresh

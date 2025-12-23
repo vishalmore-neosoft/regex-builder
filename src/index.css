@@ -5,9 +5,21 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-color: #efefef;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+.regex-segment-container {
+  min-width: 200;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  padding: 8px;
+  border-radius: 6px 6px 6px 0;
+}
+
+.regex-output-container{
 }

@@ -147,12 +147,7 @@ export default function RegexBuilder() {
             <Stack
               direction="row"
               spacing={1}
-              sx={{
-                minWidth: 200,
-                border: "1px solid #ccc",
-                p: 1,
-                borderRadius: "6px 6px 6px 0",
-              }}
+              className="regex-segment-container"
             >
               <Stack direction="row" flexGrow={1} alignItems="center">
                 {segments.map((seg) => (
@@ -219,8 +214,10 @@ export default function RegexBuilder() {
                 </InputAdornment>
               ),
             }}
+            className="regex-output-container"
             sx={{
               "& .MuiOutlinedInput-root": {
+                backgroundColor: '#fff',
                 borderRadius: "0px 0px 6px 6px",
                 "& .MuiOutlinedInput-notchedOutline": {
                   border: "1px solid #ccc",
