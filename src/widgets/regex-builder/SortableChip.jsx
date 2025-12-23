@@ -1,0 +1,115 @@
+import { Chip, TextField, Box } from "@mui/material";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
+import { useState } from "react";
+import SegmentContextMenu from "./SegmentContextMenu";
+
+export default function SortableChip({
+  segment,
+  isEditing,
+  editingValue,
+  setEditingValue,
+  onDoubleClick,
+  onChangeType,
+  onDelete,
+  saveEdit,
+  handleKeyDown,
+}) {
+  const { attributes, listeners, setNodeRef, transform, transition } =
+    useSortable({ id: segment.id });
+
+  const [menuAnchor, setMenuAnchor] = useState(null);
+
+  const style = {
+    transform: CSS.Transform.toString(transform),
+    transition,
+  };
+
+  if (isEditing && segment.type === "fixed") {
+    return (
+      <TextField
+        id={segment.id}
+        value={editingValue}
+        onChange={(e) => setEditingValue(e.target.value)}
+        onBlur={saveEdit}
+        onKeyDown={handleKeyDown}
+        autoFocus
+        size="small"
+        sx={{
+          width: 82,
+          height: 32,
+          "& .MuiInputBase-root": { height: 32, fontSize: "0.75rem" },
+          "& input": { textAlign: "center", padding: 0 },
+        }}
+      />
+    );
+  }
+
+  const label =
+    segment.type === "fixed"
+      ? segment.config.value
+      : segment.type === "digits"
+      ? `Digits {${segment.config.min}-${segment.config.max}}`
+      : segment.type === "letters"
+      ? `Letters {${segment.config.min}-${segment.config.max}}`
+      : segment.type === "alphanumeric"
+      ? `Alphanumeric {${segment.config.min}-${segment.config.max}}` 
+      : "Custom";
+
+  return (
+    <>
+      <Box
+        ref={setNodeRef}
+        sx={{
+          display: "inline-flex",
+          alignItems: "center",
+          ...style
+        }}
+      >
+        <Chip
+          id={segment.id}
+          label={label}
+          variant="outlined"
+          onDoubleClick={() => onDoubleClick(segment)}
+          onContextMenu={(e) => {
+            e.preventDefault();
+            setMenuAnchor(e.currentTarget);
+          }}
+          sx={{
+            height: 32,
+            px: 1,
+            fontSize: "0.75rem",
+            borderRadius: 1.5,
+            cursor: "pointer",
+            backgroundColor: "action.hover",
+          }}
+        />
+
+        <Box
+          {...attributes}
+          {...listeners}
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            cursor: "grab",
+            pl: 0.5,
+            color: "text.secondary",
+          }}
+        >
+          <DragIndicatorIcon fontSize="small" />
+        </Box>
+      </Box>
+
+      <SegmentContextMenu
+        anchorEl={menuAnchor}
+        onClose={() => setMenuAnchor(null)}
+        onSelect={(type) => {
+          if (type === "delete") onDelete(segment.id);
+          else onChangeType(segment.id, type);
+          setMenuAnchor(null);
+        }}
+      />
+    </>
+  );
+}
