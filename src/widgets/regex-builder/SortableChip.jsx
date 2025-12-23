@@ -37,7 +37,7 @@ export default function SortableChip({
         autoFocus
         size="small"
         sx={{
-          width: 82,
+          width: 58,
           height: 32,
           "& .MuiInputBase-root": { height: 32, fontSize: "0.75rem" },
           "& input": { textAlign: "center", padding: 0 },
@@ -54,7 +54,7 @@ export default function SortableChip({
       : segment.type === "letters"
       ? `Letters {${segment.config.min}-${segment.config.max}}`
       : segment.type === "alphanumeric"
-      ? `Alphanumeric {${segment.config.min}-${segment.config.max}}` 
+      ? `Alphanumeric {${segment.config.min}-${segment.config.max}}`
       : "Custom";
 
   return (
@@ -64,7 +64,7 @@ export default function SortableChip({
         sx={{
           display: "inline-flex",
           alignItems: "center",
-          ...style
+          ...style,
         }}
       >
         <Chip
@@ -78,9 +78,9 @@ export default function SortableChip({
           }}
           sx={{
             height: 32,
-            px: 1,
+            px: 0,
             fontSize: "0.75rem",
-            borderRadius: 1.5,
+            borderRadius: 1,
             cursor: "pointer",
             backgroundColor: "action.hover",
           }}
@@ -93,11 +93,11 @@ export default function SortableChip({
             display: "flex",
             alignItems: "center",
             cursor: "grab",
-            pl: 0.5,
+            pl: 0,
             color: "text.secondary",
           }}
         >
-          <DragIndicatorIcon fontSize="small" />
+          <DragIndicatorIcon fontSize="8px" />
         </Box>
       </Box>
 
