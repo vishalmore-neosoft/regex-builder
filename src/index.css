@@ -5,7 +5,8 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #efefef;
+  background-color: #fefefe;
+  padding: 16px;
 }
 
 code {
@@ -15,11 +16,38 @@ code {
 
 .regex-segment-container {
   min-width: 200;
-  border: 1px solid #ccc;
+  border: 1px solid #cdcdcd;
   background-color: #fff;
-  padding: 8px;
-  border-radius: 6px 6px 6px 0;
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+.regex-segments{
+  overflow-x: auto;
+}
+.regex-output-container{
+  color: #2563EB;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background-color: #efefef;
+  padding: 4px 8px;
+  border-radius: 4px;
+  margin-top: 8px;
+}
+.regex-segment{
+  font-size: 14px;
+  font-weight: 400;
+  white-space: nowrap;
+}
+.regex-segment-fixed{
+  background-color: #efefef !important;
 }
 
-.regex-output-container{
+
+.regex-segment-chip{
+  position: relative;
+  padding: 2px 12px;
+  border-radius: 3px;
+  cursor: pointer;
+  background-color: #ebebeb;
 }

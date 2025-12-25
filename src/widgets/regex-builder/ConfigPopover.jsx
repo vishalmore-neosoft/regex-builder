@@ -28,9 +28,9 @@ export default function ConfigPopover({
       onClose={onClose}
       anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
     >
-      <Stack gap={4} sx={{ p: 3, minWidth: 220 }}>
+      <Stack gap={1} sx={{ p: 3, minWidth: 220 }}>
         {["digits", "letters", "alphanumeric"].includes(segment.type) && (
-          <>
+          <Stack direction={"row"} gap={2}>
             <TextField
               type="number"
               label="Min"
@@ -45,7 +45,7 @@ export default function ConfigPopover({
               onChange={(e) => onChange("max", +e.target.value)}
               size="small"
             />
-          </>
+          </Stack>
         )}
 
         {segment.type === "letters" && (

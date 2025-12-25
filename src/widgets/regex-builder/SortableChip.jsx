@@ -1,4 +1,4 @@
-import { Chip, TextField, Box } from "@mui/material";
+import { Chip, TextField, Box, Typography } from "@mui/material";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -61,15 +61,18 @@ export default function SortableChip({
     <>
       <Box
         ref={setNodeRef}
+        {...attributes}
+        {...listeners}
+        className="regex-segment-chip"
         sx={{
           display: "inline-flex",
           alignItems: "center",
           ...style,
         }}
       >
-        <Chip
+        <div
           id={segment.id}
-          label={label}
+          className={`regex-segment ${segment.type}`}
           variant="outlined"
           onDoubleClick={() => onDoubleClick(segment)}
           onContextMenu={(e) => {
@@ -84,21 +87,10 @@ export default function SortableChip({
             cursor: "pointer",
             backgroundColor: "action.hover",
           }}
-        />
-
-        <Box
-          {...attributes}
-          {...listeners}
-          sx={{
-            display: "flex",
-            alignItems: "center",
-            cursor: "grab",
-            pl: 0,
-            color: "text.secondary",
-          }}
         >
-          <DragIndicatorIcon fontSize="8px" />
-        </Box>
+          <Typography variant="caption">{label}</Typography>
+        </div>
+
       </Box>
 
       <SegmentContextMenu

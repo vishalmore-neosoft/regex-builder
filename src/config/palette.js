@@ -1,5 +1,11 @@
-export const lightPalette = {
-  mode: "light",
+export const themePalette = {
+  typography: {
+    fontFamily: `"Open Sans", sans-serif`,
+    fontWeightLight: 300,
+    fontWeightRegular: 400,
+    fontWeightMedium: 500,
+    fontWeightBold: 600
+  },
   primary: {
     main: "#2563EB",
     light: "#3B82F6",
@@ -33,23 +39,4 @@ export const lightPalette = {
     secondary: "#475569"
   },
   divider: "#E2E8F0"
-};
-
-export const darkPalette = {
-  mode: "dark",
-  primary: {
-    main: "#60A5FA"
-  },
-  secondary: {
-    main: "#C084FC"
-  },
-  background: {
-    default: "#020617",
-    paper: "#020617"
-  },
-  text: {
-    primary: "#E5E7EB",
-    secondary: "#94A3B8"
-  },
-  divider: "#1E293B"
 };

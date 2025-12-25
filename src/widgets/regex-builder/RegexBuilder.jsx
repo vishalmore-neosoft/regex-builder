@@ -3,12 +3,12 @@ import {
   Box,
   Stack,
   IconButton,
-  TextField,
   Container,
-  InputAdornment,
   Tooltip,
+  Typography,
 } from "@mui/material";
 import AddIcon from "@mui/icons-material/Add";
+import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import { v4 as uuidv4 } from "uuid";
 import {
@@ -125,10 +125,7 @@ export default function RegexBuilder() {
   };
 
   return (
-    <Box
-      sx={{ height: "100vh", display: "grid", placeItems: "center", gap: 3 }}
-    >
-      <Container>
+    <div>
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -144,12 +141,15 @@ export default function RegexBuilder() {
             items={segments.map((s) => s.id)}
             strategy={horizontalListSortingStrategy}
           >
+            <Typography variant="body1" color="primary" gutterBottom>
+              Start adding regex segments
+            </Typography>
             <Stack
               direction="row"
               spacing={1}
               className="regex-segment-container"
             >
-              <Stack direction="row" flexGrow={1} alignItems="center">
+              <Stack className="regex-segments" gap={1} direction="row" flexGrow={1} alignItems="center">
                 {segments.map((seg) => (
                   <SortableChip
                     key={seg.id}
@@ -181,60 +181,53 @@ export default function RegexBuilder() {
                   />
                 ))}
               </Stack>
-              <IconButton onClick={addSegment}>
-                <AddIcon />
-              </IconButton>
+              <Tooltip title={"Add regex segment"}>
+                <IconButton
+                  variant="outlined"
+                  color="primary"
+                  size="small"
+                  onClick={addSegment}
+                >
+                  <AddIcon />
+                </IconButton>
+              </Tooltip>
             </Stack>
           </SortableContext>
         </DndContext>
-
-        <Box sx={{ width: 600 }}>
-          <TextField
-            fullWidth
-            size="small"
-            value={regex}
-            slotProps={{
-              input: {
-                readOnly: true,
-              },
-            }}
-            InputProps={{
-              endAdornment: (
-                <InputAdornment position="end">
-                  <Tooltip title={copied ? "Copied!" : "Copy"}>
-                    <IconButton
-                      edge="end"
-                      size="small"
-                      onClick={handleCopy}
-                      tabIndex={-1}
-                    >
-                      <ContentCopyIcon fontSize="small" />
-                    </IconButton>
-                  </Tooltip>
-                </InputAdornment>
-              ),
-            }}
-            className="regex-output-container"
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                backgroundColor: '#fff',
-                borderRadius: "0px 0px 6px 6px",
-                "& .MuiOutlinedInput-notchedOutline": {
-                  border: "1px solid #ccc",
-                },
-                "&:hover .MuiOutlinedInput-notchedOutline": {
-                  border: "1px solid #ccc",
-                },
-                "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-                  border: "1px solid #ccc",
-                },
-              },
-              "& input": {
-                cursor: "default",
-              },
-            }}
-          />
-        </Box>
+        {regex && (
+          <div className="regex-output-container">
+            <code>{regex}</code>
+            <Tooltip title={copied ? "Copied!" : "Copy"}>
+              {
+                !copied?
+                <IconButton
+                edge="end"
+                size="small"
+                onClick={handleCopy}
+                tabIndex={-1}
+              >
+                <ContentCopyIcon
+                  variant="contained"
+                  color="primary"
+                  fontSize="8px"
+                />
+              </IconButton>:
+              <IconButton
+                edge="end"
+                size="small"
+                disabled
+                tabIndex={-1}
+              >
+                <CheckCircleIcon
+                  variant="contained"
+                  color="success"
+                  fontSize="8px"
+                />
+              </IconButton>
+              }
+            </Tooltip>
+          </div>
+        )}
 
         <ConfigPopover
           anchorEl={anchorEl}
@@ -252,7 +245,6 @@ export default function RegexBuilder() {
         />
 
         <RegexExamples regex={regex} />
-      </Container>
-    </Box>
+      </div>
   );
 }

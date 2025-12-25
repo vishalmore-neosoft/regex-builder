@@ -1,3 +1,3 @@
 import RegexBuilder from "./RegexBuilder";
 
-export { RegexBuilder}
+export default RegexBuilder;

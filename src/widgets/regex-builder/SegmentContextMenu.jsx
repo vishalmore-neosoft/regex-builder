@@ -24,9 +24,6 @@ export default function SortableContextMenu({ anchorEl, onClose, onSelect }) {
         </MenuItem>
       ))}
       <MenuItem onClick={() => onSelect("delete")} sx={{ color: "error.main" }}>
-        <ListItemIcon sx={{ color: "error.main" }}>
-          <DeleteIcon fontSize="small" />
-        </ListItemIcon>
         <ListItemText>Delete Segment</ListItemText>
       </MenuItem>
     </Menu>
