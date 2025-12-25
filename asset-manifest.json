@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/regex-builder/static/css/main.fa5391d2.css",
-    "main.js": "/regex-builder/static/js/main.decaba76.js",
+    "main.css": "/regex-builder/static/css/main.f39eabd3.css",
+    "main.js": "/regex-builder/static/js/main.56eb2b33.js",
     "static/js/453.3fcfc9e0.chunk.js": "/regex-builder/static/js/453.3fcfc9e0.chunk.js",
     "index.html": "/regex-builder/index.html",
-    "main.fa5391d2.css.map": "/regex-builder/static/css/main.fa5391d2.css.map",
-    "main.decaba76.js.map": "/regex-builder/static/js/main.decaba76.js.map",
+    "main.f39eabd3.css.map": "/regex-builder/static/css/main.f39eabd3.css.map",
+    "main.56eb2b33.js.map": "/regex-builder/static/js/main.56eb2b33.js.map",
     "453.3fcfc9e0.chunk.js.map": "/regex-builder/static/js/453.3fcfc9e0.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.fa5391d2.css",
-    "static/js/main.decaba76.js"
+    "static/css/main.f39eabd3.css",
+    "static/js/main.56eb2b33.js"
   ]
 }
